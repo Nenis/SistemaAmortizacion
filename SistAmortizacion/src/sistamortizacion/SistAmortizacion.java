@@ -41,11 +41,12 @@ public class SistAmortizacion {
         
         System.out.println(aleman.getClass());
         
-       /* System.out.println(aleman.calcularTablaAmortizacion().toString());
-        System.out.println(frances.calcularTablaAmortizacion().toString());
+       System.out.println(aleman.calcularTablaAmortizacion().toString());
+        /*System.out.println(frances.calcularTablaAmortizacion().toString());
         System.out.println(americano.calcularTablaAmortizacion().toString());
         */
-        FactorySistemaAmortizacion factory = new FactorySistemaAmortizacion();
+        FactorySistemaAmortizacion factory = FactorySistemaAmortizacion.getInstance();
+      
         SistemaAmortizacion aleman2 = factory.crearSistemaAmortizacion(dtoSistema);
         
         System.out.println(aleman2.getMoneda());
