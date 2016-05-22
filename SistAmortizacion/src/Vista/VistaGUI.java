@@ -43,7 +43,7 @@ public class VistaGUI extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jSpinner1 = new javax.swing.JSpinner();
         jTextField5 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        sistemas = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -54,7 +54,7 @@ public class VistaGUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnRealizarOperacion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,8 +116,8 @@ public class VistaGUI extends javax.swing.JFrame {
 
         jTextField5.setName("txt_interes"); // NOI18N
 
-        jComboBox1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alemán", "Francés", "Americano" }));
+        sistemas.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        sistemas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alemán", "Francés", "Americano" }));
 
         jLabel9.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel9.setText("Seleccione el tipo de moneda:");
@@ -171,12 +171,12 @@ public class VistaGUI extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel7.setText("Interés Anual: ");
 
-        jButton1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jButton1.setText("Realizar Operación");
-        jButton1.setName("btnRealizarOperacion"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRealizarOperacion.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        btnRealizarOperacion.setText("Realizar Operación");
+        btnRealizarOperacion.setName("btnRealizarOperacion"); // NOI18N
+        btnRealizarOperacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRealizarOperacionActionPerformed(evt);
             }
         });
 
@@ -191,7 +191,7 @@ public class VistaGUI extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(btnRealizarOperacion))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +204,7 @@ public class VistaGUI extends javax.swing.JFrame {
                                     .addComponent(jLabel8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sistemas, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(13, 13, 13)
@@ -269,7 +269,7 @@ public class VistaGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sistemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -278,7 +278,7 @@ public class VistaGUI extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnRealizarOperacion)
                     .addComponent(jButton2))
                 .addGap(30, 30, 30))
         );
@@ -294,9 +294,9 @@ public class VistaGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRealizarOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarOperacionActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRealizarOperacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,9 +334,8 @@ public class VistaGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRealizarOperacion;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -357,5 +356,6 @@ public class VistaGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JComboBox<String> sistemas;
     // End of variables declaration//GEN-END:variables
 }
