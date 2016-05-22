@@ -26,36 +26,46 @@ public class WebServiceBCCR implements IIndicadorEconomico {
     }
 
     @Override
-    public String obtenerTipoCambio() {
+    public String obtenerTipoCambioDolar() {
+        obtenerRespuesta();
         String valor = "";
         try {
             File xml = new File("RespuestaBCCR.xml"); //Lee archivo xml
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = documentFactory.newDocumentBuilder();
             Document document = (Document) db.parse(xml);
-           
+
             NodeList list = document.getElementsByTagName("INGC011_CAT_INDICADORECONOMIC");
-            
+
             for (int i = 0; i < list.getLength(); i++) {
                 Node node = list.item(i);
-                if(node.getNodeType() == Node.ELEMENT_NODE){
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
-                    valor =  element.getElementsByTagName("NUM_VALOR").item(0).getTextContent();
+                    valor = element.getElementsByTagName("NUM_VALOR").item(0).getTextContent();
                 }
             }
-            
+
         } catch (ParserConfigurationException | SAXException | IOException ex) {
-            System.out.println("Error");
+            return ex.toString();
         }
-        return valor;
+        
+        return reducirDecimales(valor);
     }
 
-    public void obtenerRespuesta(){
+    
+    private String reducirDecimales(String valor) {
+        Double tipoCambio = Double.parseDouble(valor);
+        DecimalFormat decimales = new DecimalFormat("0.00");
+        decimales.format(tipoCambio);
+        return String.valueOf(tipoCambio);
+    }
+
+    private void obtenerRespuesta() {
         try {
             String urlWS = "http://indicadoreseconomicos.bccr.fi.cr/indicadoreseconomicos/WebServices/wsIndicadoresEconomicos.asmx";
             String methodWS = "/ObtenerIndicadoresEconomicos";
             URL url = new URL(urlWS + methodWS + "?tcIndicador=" + this.indicador + "&tcFechaInicio=" + this.fechaInicio
-                    + "&tcFechaFinal=" + this.fechaFinal + "&tcNombre=" + this.nombre + "&tnSubNiveles=" + this.subniveles);            
+                    + "&tcFechaFinal=" + this.fechaFinal + "&tcNombre=" + this.nombre + "&tnSubNiveles=" + this.subniveles);
             BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
             String strTemp = "";
             while (null != (strTemp = br.readLine())) {
@@ -65,7 +75,7 @@ public class WebServiceBCCR implements IIndicadorEconomico {
         } catch (MalformedURLException ex) {
             System.out.println("La direccion url no es correcta");
         } catch (IOException ex) {
-            System.out.println("La petición no fue respondida");
+            System.out.println("El servidor no dio respuesta");
         }
     }
 
@@ -93,3 +103,4 @@ public class WebServiceBCCR implements IIndicadorEconomico {
         }
     }
 }
+

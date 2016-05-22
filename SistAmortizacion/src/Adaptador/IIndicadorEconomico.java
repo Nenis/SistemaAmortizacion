@@ -11,5 +11,5 @@ package Adaptador;
  */
 public interface IIndicadorEconomico {
     
-    public String obtenerTipoCambio();
+    public String obtenerTipoCambioDolar();
 }
