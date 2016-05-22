@@ -5,6 +5,8 @@
  */
 package sistamortizacion;
 
+import Adaptador.ClienteChucky;
+import Adaptador.ITiempo;
 import DataTransferObject.*;
 import Modelo.*;
 import Modelo.Fabrica.FactorySistemaAmortizacion;
@@ -41,6 +43,9 @@ public class SistAmortizacion {
         SistemaAmortizacion aleman2 = factory.crearSistemaAmortizacion(dtoSistema);
         
         System.out.println(aleman2.getMoneda());
+        
+        ITiempo chucky = new ClienteChucky();
+        System.out.println(chucky.getFechaHora());
         
         
                 
