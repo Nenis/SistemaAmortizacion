@@ -15,15 +15,10 @@ import java.util.ArrayList;
 public class Subject {
 
     private ArrayList<Bitacora> observers = new ArrayList<>();
-    private int estado;
 
-    public int getState() {
-        return estado;
-    }
 
-    public void setEstado(int estado, DTOCliente cliente,DTOSistema sistema) {
-        this.estado = estado;
-        notificarObservadores(cliente,sistema);
+    public void setRegistro(DTOCliente cliente, DTOSistema sistema) {
+        notificarObservadores(cliente, sistema);
     }
 
     public void attach(Bitacora observer) {
@@ -32,7 +27,7 @@ public class Subject {
 
     public void notificarObservadores(DTOCliente cliente, DTOSistema sistema) {
         for (Bitacora observer : observers) {
-            observer.update(cliente,sistema);
+            observer.update(cliente, sistema);
         }
     }
 }

@@ -27,7 +27,7 @@ public abstract class Bitacora {
 
     public abstract void crearNuevoRegistro(DTOCliente cliente, DTOSistema sistema);
 
-    void update(DTOCliente cliente, DTOSistema sistema) {
+    public void update(DTOCliente cliente, DTOSistema sistema) {
         añadirRegristro(cliente, sistema);
     }
 
