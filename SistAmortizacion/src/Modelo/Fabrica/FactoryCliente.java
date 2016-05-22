@@ -16,7 +16,20 @@ import java.lang.reflect.InvocationTargetException;
  * @author Kenneth
  */
 public class FactoryCliente {
+        
+        private static FactoryCliente instancia = null;
     
+        private FactoryCliente(){}
+    
+
+        public static FactoryCliente getInstance(){
+            if(instancia == null){
+                FactoryCliente instancia = new FactoryCliente();
+                return instancia;
+            }
+            return FactoryCliente.instancia;  
+        }
+        
         public Cliente crearCliente(DTOCliente dtoCliente) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
         Class c = Class.forName("Modelo." + dtoCliente.getTipo());
