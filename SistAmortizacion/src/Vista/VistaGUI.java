@@ -7,6 +7,8 @@ package Vista;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
+import Adaptador.WebServiceBCCR;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -295,7 +297,8 @@ public class VistaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void btnRealizarOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarOperacionActionPerformed
-
+            WebServiceBCCR wb = new WebServiceBCCR();
+            JOptionPane.showMessageDialog(null, wb.obtenerTipoCambioDolar());
     }//GEN-LAST:event_btnRealizarOperacionActionPerformed
 
     /**
