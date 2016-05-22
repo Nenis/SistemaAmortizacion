@@ -16,13 +16,25 @@ import java.util.ArrayList;
  * @author Kenneth
  */
 public class FactorySistemaAmortizacion {
-    
+
+    private static FactorySistemaAmortizacion instancia;
+
+    private FactorySistemaAmortizacion() {
+    }
+
+    public static FactorySistemaAmortizacion getInstance() {
+        if (instancia == null) {
+            FactorySistemaAmortizacion instancia = new FactorySistemaAmortizacion();
+            return instancia;
+        }
+        return FactorySistemaAmortizacion.instancia;
+    }
+
     public SistemaAmortizacion crearSistemaAmortizacion(DTOSistema dtoSistema) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
         Class c = Class.forName("Modelo." + dtoSistema.getTipo());
         SistemaAmortizacion objeto = (SistemaAmortizacion) c.getConstructor(DTOSistema.class).newInstance(dtoSistema);
         return objeto;
     }
-    
-    
+
 }

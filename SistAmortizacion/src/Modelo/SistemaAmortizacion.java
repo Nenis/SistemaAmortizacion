@@ -4,14 +4,16 @@
  * and open the template in the editor.
  */
 package Modelo;
+
 import DataTransferObject.*;
 import java.util.ArrayList;
+
 /**
  *
  * @author Kenneth
  */
 public abstract class SistemaAmortizacion {
-    
+
     private int cantidadInstancias = 0;
     protected String id;
     protected Double montoPrestamo;
@@ -22,65 +24,77 @@ public abstract class SistemaAmortizacion {
 
     protected int plazoActual;
     protected Double montoActual;
-     
-    public SistemaAmortizacion(DTOSistema dtoSistema){
-        
-        cantidadInstancias ++;
+
+    public SistemaAmortizacion(DTOSistema dtoSistema) {
+
+        cantidadInstancias++;
         this.montoPrestamo = dtoSistema.getMontoPrestamo();
         this.plazo = dtoSistema.getPlazo();
         this.interes = dtoSistema.getInteres();
         this.moneda = dtoSistema.getMoneda();
         this.cliente = dtoSistema.getCliente();
-        
+
         this.plazoActual = 1;
         this.montoActual = montoPrestamo;
-       
+
     }
-    
+
     protected abstract Double calcularAmortizacion();
+
     protected abstract Double calcularInteres();
+
     protected abstract Double calcularCuota();
-    
+
     protected void reducirMontoActual() {
         this.montoActual = montoActual - calcularAmortizacion();
     }
-    
+
     protected Double calcularDeuda() {
-        
+
         return this.montoActual;
     }
-    
-    public ArrayList<ArrayList<Double>> calcularTablaAmortizacion(){
-        
-        ArrayList<Double> deudas = new ArrayList<>();
-        ArrayList<Double> intereses = new ArrayList<>();
-        ArrayList<Double> amortizaciones = new ArrayList<>();
-        ArrayList<Double> cuotas = new ArrayList<>();
-       
-        for (;this.plazoActual <= plazo; this.plazoActual ++) {
+
+    public ArrayList<ArrayList<Double>> calcularTablaAmortizacion() {
+
+        ArrayList<Double> deudas = new ArrayList<>(),
+                intereses = new ArrayList<>(),
+                amortizaciones = new ArrayList<>(), cuotas = new ArrayList<>();
+
+        for (; this.plazoActual <= plazo; this.plazoActual++) {
             deudas.add(calcularDeuda());
             intereses.add(calcularInteres());
             amortizaciones.add(calcularAmortizacion());
             cuotas.add(calcularCuota());
-            
             reducirMontoActual();
-            
         }
-        
+
         ArrayList<ArrayList<Double>> tabla = new ArrayList<ArrayList<Double>>();
         tabla.add(deudas);
         tabla.add(intereses);
         tabla.add(amortizaciones);
         tabla.add(cuotas);
-        
+        ArrayList<ArrayList<Double>> tablaTotal = this.agregarTotales(tabla);
+        return tablaTotal;
+    }
+
+    private ArrayList<ArrayList<Double>> agregarTotales(ArrayList<ArrayList<Double>> tabla) {
+        double total = 0;
+        ArrayList<Double> lista;
+        for (int i = 1; i < tabla.size(); i++) {
+            lista = tabla.get(i);
+            for (Double elemento : lista) {
+                total += elemento;
+            }
+            lista.add(total);
+            total = 0;
+        }
         return tabla;
     }
-    
-    protected void aumentarPlazoActual() {
-        
+
+protected void aumentarPlazoActual() {
+
         this.plazoActual++;
     }
-    
 
     public int getCantidadInstancias() {
         return cantidadInstancias;
@@ -137,6 +151,7 @@ public abstract class SistemaAmortizacion {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
     public int getPlazoActual() {
         return plazoActual;
     }

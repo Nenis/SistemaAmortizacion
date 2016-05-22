@@ -5,10 +5,19 @@
  */
 package Controlador;
 
+import DataTransferObject.DTOCliente;
+import DataTransferObject.DTOSistema;
+import Modelo.Cliente;
+import Modelo.SistemaAmortizacion;
+
 /**
  *
  * @author SilviaElena
  */
 public interface IControlador {
+    
+    public Cliente crearCliente(DTOCliente dtoCliente);
+    public SistemaAmortizacion crearAmortizacion(DTOSistema dtoSistema);
+    public void registrarBitacora(DTOCliente dtoCliente,DTOSistema dtoSistema);
     
 }
