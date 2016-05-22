@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package Modelo.Observador;
 
 import DataTransferObject.DTOCliente;
 import DataTransferObject.DTOSistema;
 import java.io.*;
 import java.util.logging.*;
 import javax.xml.parsers.*;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -26,8 +24,10 @@ public class BitacoraXML extends Bitacora {
 
     private static String pathXML;
 
-    public BitacoraXML() {
+    public BitacoraXML(Subject subject) {
         this.pathXML = "Registro_Historico.xml";
+        this.subject = subject;
+        this.subject.attach(this);
     }
 
     @Override

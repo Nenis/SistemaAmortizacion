@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import javax.swing.JFormattedTextField;
+import javax.swing.JSpinner;
+
 /**
  *
  * @author SilviaElena
@@ -16,6 +19,8 @@ public class VistaGUI extends javax.swing.JFrame {
      */
     public VistaGUI() {
         initComponents();
+        JFormattedTextField tf = ((JSpinner.DefaultEditor) jSpinner1.getEditor()).getTextField();
+        tf.setEditable(false);
     }
 
     /**
@@ -106,6 +111,8 @@ public class VistaGUI extends javax.swing.JFrame {
         jTextField4.setName("txt_monto"); // NOI18N
 
         jSpinner1.setName("periodo"); // NOI18N
+        jSpinner1.setOpaque(false);
+        jSpinner1.setValue(1);
 
         jTextField5.setName("txt_interes"); // NOI18N
 
@@ -289,7 +296,6 @@ public class VistaGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -345,7 +351,7 @@ public class VistaGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JSpinner jSpinner1;
+    public javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

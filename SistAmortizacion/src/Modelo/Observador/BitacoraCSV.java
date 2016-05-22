@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package Modelo.Observador;
 
 import DataTransferObject.DTOCliente;
 import DataTransferObject.DTOSistema;
@@ -20,8 +20,10 @@ public class BitacoraCSV extends Bitacora {
 
     private static String pathCSV;
 
-    public BitacoraCSV() {
+    public BitacoraCSV(Subject subject) {
         BitacoraCSV.pathCSV = "Registro_Historico.csv";
+        this.subject = subject;
+        subject.attach(this);
     }
 
     @Override

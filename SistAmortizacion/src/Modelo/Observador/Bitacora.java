@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package Modelo.Observador;
 
 import DataTransferObject.*;
 import java.io.File;
@@ -14,15 +14,22 @@ import java.io.File;
  */
 public abstract class Bitacora {
 
+    protected Subject subject;
+
     public abstract void crearArchivo();
-    
-    public Boolean validarArchivo(String path){
+
+    public Boolean validarArchivo(String path) {
         File archivo = new File(path);
         return archivo.exists();
+        
     }
-    
+
     public abstract void añadirRegristro(DTOCliente cliente, DTOSistema sistema);
-    
+
     public abstract void crearNuevoRegistro(DTOCliente cliente, DTOSistema sistema);
-    
+
+    public void update(DTOCliente cliente, DTOSistema sistema) {
+        añadirRegristro(cliente, sistema);
+    }
+
 }
