@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,12 +11,13 @@ package DataTransferObject;
  * @author Kenneth
  */
 public class DTOCliente {
-
+    
     public String nombre;
     public String primerApellido;
     public String segundoApellido;
-
-    public DTOCliente(String nombre, String primerApellido, String segundoApellido) {
+    public String tipo;
+    
+    public DTOCliente(String nombre, String primerApellido, String segundoApellido){
         this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
@@ -45,7 +47,17 @@ public class DTOCliente {
         this.segundoApellido = segundoApellido;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
     public String getNombreCompleto() {
         return getNombre() + " " + getPrimerApellido() + " " + getSegundoApellido();
     }
+    
 }
+
