@@ -9,6 +9,8 @@ import DataTransferObject.*;
 import Modelo.*;
 import Modelo.Fabrica.FactorySistemaAmortizacion;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -24,6 +26,7 @@ public class SistAmortizacion {
         DTOCliente dtoCliente = new DTOCliente("silvia","elena","alpizar");
         Cliente cliente = new ClienteFisico(dtoCliente);
         DTOSistema dtoSistema = new DTOSistema(1000000.0,5,0.15,"colones", cliente);
+        dtoSistema.setTipo("Aleman");
         SistemaAmortizacion aleman = new Aleman(dtoSistema);
         SistemaAmortizacion frances = new Frances(dtoSistema);
         SistemaAmortizacion americano = new Americano(dtoSistema);

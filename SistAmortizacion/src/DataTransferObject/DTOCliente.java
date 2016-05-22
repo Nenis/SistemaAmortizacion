@@ -14,6 +14,7 @@ public class DTOCliente {
     public String nombre;
     public String primerApellido;
     public String segundoApellido;
+    public String tipo;
     
     public DTOCliente(String nombre, String primerApellido, String segundoApellido){
         this.nombre = nombre;
@@ -43,6 +44,14 @@ public class DTOCliente {
 
     public void setSegundoApellido(String segundoApellido) {
         this.segundoApellido = segundoApellido;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
     
 }
