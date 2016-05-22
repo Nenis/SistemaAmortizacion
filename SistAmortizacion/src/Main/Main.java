@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistamortizacion;
+package Main;
 
 import Adaptador.ClienteChucky;
 import Adaptador.ITiempo;
@@ -14,14 +14,12 @@ import Modelo.Observador.BitacoraCSV;
 import Modelo.Observador.BitacoraXML;
 import Modelo.Observador.Subject;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
  * @author SilviaElena
  */
-public class SistAmortizacion {
+public class Main {
 
     /**
      * @param args the command line arguments
@@ -41,12 +39,11 @@ public class SistAmortizacion {
         
         System.out.println(aleman.getClass());
         
-       System.out.println(aleman.calcularTablaAmortizacion().toString());
-        /*System.out.println(frances.calcularTablaAmortizacion().toString());
+       /* System.out.println(aleman.calcularTablaAmortizacion().toString());
+        System.out.println(frances.calcularTablaAmortizacion().toString());
         System.out.println(americano.calcularTablaAmortizacion().toString());
         */
         FactorySistemaAmortizacion factory = FactorySistemaAmortizacion.getInstance();
-      
         SistemaAmortizacion aleman2 = factory.crearSistemaAmortizacion(dtoSistema);
         
         System.out.println(aleman2.getMoneda());
