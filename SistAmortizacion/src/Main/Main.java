@@ -3,24 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistamortizacion;
+package Main;
 
-import Validacion.Validacion;
 import DataTransferObject.*;
 import Modelo.*;
-import Modelo.Fabrica.FactorySistemaAmortizacion;
 import Modelo.Observador.BitacoraCSV;
 import Modelo.Observador.BitacoraXML;
 import Modelo.Observador.Subject;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
  * @author SilviaElena
  */
-public class SistAmortizacion {
+public class Main {
 
     /**
      * @param args the command line arguments
