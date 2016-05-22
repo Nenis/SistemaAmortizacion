@@ -5,6 +5,7 @@
  */
 package sistamortizacion;
 
+import Validacion.Validacion;
 import DataTransferObject.*;
 import Modelo.*;
 import Modelo.Fabrica.FactorySistemaAmortizacion;
@@ -34,9 +35,9 @@ public class SistAmortizacion {
 
         Subject subject = new Subject();
         new BitacoraXML(subject);
-        new BitacoraCSV(subject);
+        new BitacoraCSV(subject); 
         subject.setRegistro(dtoCliente,dtoSistema);
-
+        
     }
 
 }

@@ -21,6 +21,7 @@ public abstract class Bitacora {
     public Boolean validarArchivo(String path) {
         File archivo = new File(path);
         return archivo.exists();
+        
     }
 
     public abstract void añadirRegristro(DTOCliente cliente, DTOSistema sistema);
