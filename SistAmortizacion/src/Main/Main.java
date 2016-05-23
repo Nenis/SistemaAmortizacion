@@ -13,6 +13,7 @@ import Modelo.Fabrica.FactorySistemaAmortizacion;
 import Modelo.Observador.BitacoraCSV;
 import Modelo.Observador.BitacoraXML;
 import Modelo.Observador.Subject;
+import Vista.VistaConsola;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -26,7 +27,7 @@ public class Main {
      */
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         // TODO code application logic here
-        DTOCliente dtoCliente = new DTOCliente("silvia", "elena", "alpizar");
+       /* DTOCliente dtoCliente = new DTOCliente("silvia", "elena", "alpizar");
         Cliente cliente = new ClienteFisico(dtoCliente);
         DTOSistema dtoSistema = new DTOSistema(1000000.0, 5, 0.15, "colones", cliente);
         dtoSistema.setTipo("Aleman");
@@ -42,7 +43,7 @@ public class Main {
        /* System.out.println(aleman.calcularTablaAmortizacion().toString());
         System.out.println(frances.calcularTablaAmortizacion().toString());
         System.out.println(americano.calcularTablaAmortizacion().toString());
-        */
+        
         FactorySistemaAmortizacion factory = FactorySistemaAmortizacion.getInstance();
         SistemaAmortizacion aleman2 = factory.crearSistemaAmortizacion(dtoSistema);
         
@@ -50,8 +51,9 @@ public class Main {
         
         ITiempo chucky = new ClienteChucky();
         System.out.println(chucky.getFechaHora());
-        
-        
+        */
+        VistaConsola consola = new VistaConsola();
+        consola.run();
                 
     }
 

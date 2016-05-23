@@ -34,7 +34,7 @@ public class ClienteChucky implements ITiempo {
             BufferedReader buff = new BufferedReader(new InputStreamReader(chucky.getInputStream()));
             tiempo = buff.readLine();      
         } catch (Exception e) { 
-            return e.getMessage();
+            return "Error obteniendo el tiempo del cliente chucky";
         }
         return tiempo;
     }

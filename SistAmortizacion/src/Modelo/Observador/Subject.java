@@ -17,17 +17,17 @@ public class Subject {
     private ArrayList<Bitacora> observers = new ArrayList<>();
 
 
-    public void setRegistro(DTOCliente cliente, DTOSistema sistema) {
-        notificarObservadores(cliente, sistema);
+    public void setRegistro(DTOSistema sistema) {
+        notificarObservadores(sistema);
     }
 
     public void attach(Bitacora observer) {
         observers.add(observer);
     }
 
-    public void notificarObservadores(DTOCliente cliente, DTOSistema sistema) {
+    public void notificarObservadores(DTOSistema sistema) {
         for (Bitacora observer : observers) {
-            observer.update(cliente, sistema);
+            observer.update(sistema);
         }
     }
 }

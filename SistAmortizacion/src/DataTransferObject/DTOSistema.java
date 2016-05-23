@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package DataTransferObject;
+
 import Modelo.Cliente;
 import java.util.ArrayList;
 
@@ -12,23 +13,67 @@ import java.util.ArrayList;
  * @author Kenneth
  */
 public class DTOSistema {
-    
+
     private double montoPrestamo;
     private int plazo;
     private String moneda;
     private Double interes;
-    private ArrayList<Double> cuotas;
-    private ArrayList<Double> intereses;
-    private ArrayList<Double> amortizaciones;
-    private Cliente cliente;
-    private String tipo;
+    private ArrayList<ArrayList<Double>> tabla;
+    private String tipoSistema;
+    //Cliente data
+    private String nombreCliente;
+    private String primerApellidoCliente;
+    private String segundoApellidoCliente;
+    private String nombreCompletoCliente;
+    private String tipoCliente;
     
-    public DTOSistema(Double montoPrestamo,int plazo,Double interes,String moneda, Cliente cliente){
-        this.montoPrestamo = montoPrestamo;
-        this.plazo = plazo;
-        this.moneda = moneda;
-        this.interes = interes;
-        this.cliente = cliente;
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    public String getPrimerApellidoCliente() {
+        return primerApellidoCliente;
+    }
+
+    public void setPrimerApellidoCliente(String primerApellidoCliente) {
+        this.primerApellidoCliente = primerApellidoCliente;
+    }
+
+    public String getSegundoApellidoCliente() {
+        return segundoApellidoCliente;
+    }
+
+    public void setSegundoApellidoCliente(String segundoApellidoCliente) {
+        this.segundoApellidoCliente = segundoApellidoCliente;
+    }
+
+    public String getNombreCompletoCliente() {
+        return nombreCompletoCliente;
+    }
+
+    public void setNombreCompletoCliente(String nombreCompletoCliente) {
+        this.nombreCompletoCliente = nombreCompletoCliente;
+    }
+
+    public String getTipoCliente() {
+        return tipoCliente;
+    }
+
+    public void setTipoCliente(String tipoCliente) {
+        this.tipoCliente = tipoCliente;
+    }
+
+    public String getTipoSistema() {
+        return tipoSistema;
+    }
+
+    public void setTipoSistema(String tipoSistema) {
+        this.tipoSistema = tipoSistema;
     }
 
     public double getMontoPrestamo() {
@@ -42,21 +87,13 @@ public class DTOSistema {
     public String getMoneda() {
         return moneda;
     }
+    
+    public void setMoneda(String moneda){
+        this.moneda = moneda;
+    }
 
     public Double getInteres() {
         return interes;
-    }
-
-    public ArrayList<Double> getCuotas() {
-        return cuotas;
-    }
-
-    public ArrayList<Double> getIntereses() {
-        return intereses;
-    }
-
-    public ArrayList<Double> getAmortizaciones() {
-        return amortizaciones;
     }
 
     public void setMontoPrestamo(double montoPrestamo) {
@@ -71,34 +108,11 @@ public class DTOSistema {
         this.interes = interes;
     }
 
-    public void setCuotas(ArrayList<Double> cuotas) {
-        this.cuotas = cuotas;
+    public ArrayList<ArrayList<Double>> getTabla() {
+        return tabla;
     }
 
-    public void setIntereses(ArrayList<Double> intereses) {
-        this.intereses = intereses;
+    public void setTabla(ArrayList<ArrayList<Double>> tabla) {
+        this.tabla = tabla;
     }
-
-    public void setAmortizaciones(ArrayList<Double> amortizaciones) {
-        this.amortizaciones = amortizaciones;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-    
-
-    
 }

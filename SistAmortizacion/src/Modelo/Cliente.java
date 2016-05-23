@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Modelo;
-import DataTransferObject.DTOCliente;
+import DataTransferObject.DTOSistema;
 
 
 /**
@@ -19,10 +19,11 @@ public abstract class Cliente {
     protected String primerApellido;
     protected String segundoApellido;
     
-    public Cliente(DTOCliente cliente){
-        this.nombre = cliente.getNombre();
-        this.primerApellido = cliente.getPrimerApellido();
-        this.segundoApellido = cliente.getSegundoApellido();
+    public Cliente(DTOSistema sistema){
+        this.nombre = sistema.getNombreCliente();
+        this.primerApellido = sistema.getPrimerApellidoCliente();
+        this.segundoApellido = sistema.getSegundoApellidoCliente();
+        
         cantidadInstancias ++; 
     }    
 

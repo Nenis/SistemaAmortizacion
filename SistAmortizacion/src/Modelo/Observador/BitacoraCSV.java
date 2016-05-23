@@ -5,7 +5,6 @@
  */
 package Modelo.Observador;
 
-import DataTransferObject.DTOCliente;
 import DataTransferObject.DTOSistema;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -40,23 +39,23 @@ public class BitacoraCSV extends Bitacora {
     }
 
     @Override
-    public void añadirRegristro(DTOCliente cliente, DTOSistema sistema) {
+    public void añadirRegristro(DTOSistema sistema) {
         if (!validarArchivo(this.pathCSV)) 
             crearArchivo();
-        crearNuevoRegistro(cliente,sistema);
+        crearNuevoRegistro(sistema);
         
     }
 
     @Override
-    public void crearNuevoRegistro(DTOCliente cliente, DTOSistema sistema) {
+    public void crearNuevoRegistro(DTOSistema sistema) {
         try {
             FileWriter archivo = new FileWriter(BitacoraCSV.pathCSV,true);
             archivo.append("-------------------------Registro------------------------------\n");
-            archivo.append("Nombre_Cliente: " + cliente.getNombreCompleto() + "\n");
+            archivo.append("Nombre_Cliente: " + sistema.getNombreCompletoCliente()+ "\n");
             archivo.append("Monto_Prestamo_Otorgado: " + String.valueOf(sistema.getMontoPrestamo()) + "\n");
             archivo.append("Plazo_Prestamo: " + String.valueOf(sistema.getPlazo()) + "\n");
             archivo.append("Interes_Prestamo: " + String.valueOf(sistema.getInteres()) + "\n");
-            archivo.append("Sistema: " + sistema.getTipo() + "\n");
+            archivo.append("Sistema: " + sistema.getTipoSistema() + "\n");
             archivo.append("Moneda: " + sistema.getMoneda() + "\n");
             archivo.append("_____________________________________________________\n");
             archivo.flush();

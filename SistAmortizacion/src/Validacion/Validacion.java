@@ -1,5 +1,6 @@
 package Validacion;
 
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +40,11 @@ public class Validacion {
         } catch (Exception e) {
             return false;
         }
+    }
+    public Double formatearDouble(Double valor) {
+        DecimalFormat decimales = new DecimalFormat("0.00");
+        decimales.format(valor);
+        return valor;
     }
 
 }

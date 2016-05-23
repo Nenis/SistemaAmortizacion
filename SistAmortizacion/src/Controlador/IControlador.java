@@ -5,19 +5,21 @@
  */
 package Controlador;
 
-import DataTransferObject.DTOCliente;
+
 import DataTransferObject.DTOSistema;
-import Modelo.Cliente;
-import Modelo.SistemaAmortizacion;
+import java.util.ArrayList;
 
 /**
  *
  * @author SilviaElena
  */
 public interface IControlador {
+
+    public DTOSistema crearAmortizacion(DTOSistema dtoSistema);
+
+    public String getTipoCambioCompra();
     
-    public Cliente crearCliente(DTOCliente dtoCliente);
-    public SistemaAmortizacion crearAmortizacion(DTOSistema dtoSistema);
-    public void registrarBitacora(DTOCliente dtoCliente,DTOSistema dtoSistema);
+    public String getFechaHora();
     
+    public void registrarBitacora(DTOSistema dtoSistema);
 }

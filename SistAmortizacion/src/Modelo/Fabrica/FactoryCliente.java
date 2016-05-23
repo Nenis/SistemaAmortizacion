@@ -5,7 +5,6 @@
  */
 package Modelo.Fabrica;
 
-import DataTransferObject.DTOCliente;
 import DataTransferObject.DTOSistema;
 import Modelo.Cliente;
 import Modelo.SistemaAmortizacion;
@@ -30,10 +29,10 @@ public class FactoryCliente {
             return FactoryCliente.instancia;  
         }
         
-        public Cliente crearCliente(DTOCliente dtoCliente) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        public Cliente crearCliente(DTOSistema dtoSistema) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
-        Class c = Class.forName("Modelo." + dtoCliente.getTipo());
-        Cliente objeto = (Cliente) c.getConstructor(DTOCliente.class).newInstance(dtoCliente);
+        Class c = Class.forName("Modelo.Cliente" + dtoSistema.getTipoCliente());
+        Cliente objeto = (Cliente) c.getConstructor(DTOSistema.class).newInstance(dtoSistema);
         return objeto;
     }
     

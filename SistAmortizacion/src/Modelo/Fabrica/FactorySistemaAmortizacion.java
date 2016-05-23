@@ -32,7 +32,7 @@ public class FactorySistemaAmortizacion {
 
     public SistemaAmortizacion crearSistemaAmortizacion(DTOSistema dtoSistema) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
-        Class c = Class.forName("Modelo." + dtoSistema.getTipo());
+        Class c = Class.forName("Modelo." + dtoSistema.getTipoSistema());
         SistemaAmortizacion objeto = (SistemaAmortizacion) c.getConstructor(DTOSistema.class).newInstance(dtoSistema);
         return objeto;
     }

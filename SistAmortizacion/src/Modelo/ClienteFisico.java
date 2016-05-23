@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Modelo;
-import DataTransferObject.DTOCliente;
+import DataTransferObject.DTOSistema;
 
 /**
  *
@@ -14,9 +14,9 @@ public class ClienteFisico extends Cliente {
     
     private static int cantidadInstancias = 0;
     
-    public ClienteFisico(DTOCliente cliente){
+    public ClienteFisico(DTOSistema sistema){
         
-        super(cliente);
+        super(sistema);
         cantidadInstancias++;
         this.id = "Cli#" + this.cantidadInstancias;
     }  

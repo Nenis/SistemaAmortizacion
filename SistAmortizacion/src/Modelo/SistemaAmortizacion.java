@@ -6,6 +6,7 @@
 package Modelo;
 
 import DataTransferObject.*;
+import Validacion.Validacion;
 import java.util.ArrayList;
 
 /**
@@ -32,11 +33,8 @@ public abstract class SistemaAmortizacion {
         this.plazo = dtoSistema.getPlazo();
         this.interes = dtoSistema.getInteres();
         this.moneda = dtoSistema.getMoneda();
-        this.cliente = dtoSistema.getCliente();
-
         this.plazoActual = 1;
         this.montoActual = montoPrestamo;
-
     }
 
     protected abstract Double calcularAmortizacion();
@@ -59,12 +57,12 @@ public abstract class SistemaAmortizacion {
         ArrayList<Double> deudas = new ArrayList<>(),
                 intereses = new ArrayList<>(),
                 amortizaciones = new ArrayList<>(), cuotas = new ArrayList<>();
-
+        Validacion v = new Validacion();
         for (; this.plazoActual <= plazo; this.plazoActual++) {
-            deudas.add(calcularDeuda());
-            intereses.add(calcularInteres());
-            amortizaciones.add(calcularAmortizacion());
-            cuotas.add(calcularCuota());
+            deudas.add(v.formatearDouble(calcularDeuda()));
+            intereses.add((v.formatearDouble(calcularInteres())));
+            amortizaciones.add((v.formatearDouble(calcularAmortizacion())));
+            cuotas.add((v.formatearDouble(calcularCuota())));
             reducirMontoActual();
         }
 
@@ -91,7 +89,7 @@ public abstract class SistemaAmortizacion {
         return tabla;
     }
 
-protected void aumentarPlazoActual() {
+    protected void aumentarPlazoActual() {
 
         this.plazoActual++;
     }

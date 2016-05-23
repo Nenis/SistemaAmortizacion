@@ -5,7 +5,6 @@
  */
 package Modelo.Observador;
 
-import DataTransferObject.DTOCliente;
 import DataTransferObject.DTOSistema;
 import java.io.*;
 import java.util.logging.*;
@@ -49,15 +48,15 @@ public class BitacoraXML extends Bitacora {
     }
 
     @Override
-    public void añadirRegristro(DTOCliente cliente, DTOSistema sistema) {
+    public void añadirRegristro(DTOSistema sistema) {
         if (!validarArchivo(BitacoraXML.pathXML)) {
             crearArchivo();
         }
-        crearNuevoRegistro(cliente, sistema);
+        crearNuevoRegistro(sistema);
     }
 
     @Override
-    public void crearNuevoRegistro(DTOCliente cliente, DTOSistema sistema) {
+    public void crearNuevoRegistro(DTOSistema sistema) {
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -70,7 +69,7 @@ public class BitacoraXML extends Bitacora {
             Element nuevoRegistro = doc.createElement("Registro");
 
             Element nombreCliente = doc.createElement("Nombre_Cliente");
-            nombreCliente.setTextContent(" " + cliente.getNombreCompleto() + " ");
+            nombreCliente.setTextContent(" " + sistema.getNombreCompletoCliente() + " ");
 
             Element montoPrestamo = doc.createElement("Monto_Prestamo_Otorgado");
             montoPrestamo.setTextContent(String.valueOf(" " + sistema.getMontoPrestamo() + " "));
@@ -82,7 +81,7 @@ public class BitacoraXML extends Bitacora {
             interesPrestamo.setTextContent(String.valueOf(" " + sistema.getInteres() + " "));
 
             Element sistemaAmortizacion = doc.createElement("Sistema");
-            sistemaAmortizacion.setTextContent(" " + sistema.getTipo() + " ");
+            sistemaAmortizacion.setTextContent(" " + sistema.getTipoSistema() + " ");
 
             Element moneda = doc.createElement("Moneda");
             moneda.setTextContent(" " + sistema.getMoneda() + " ");

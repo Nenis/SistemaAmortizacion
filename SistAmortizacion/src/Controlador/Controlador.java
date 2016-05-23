@@ -5,7 +5,10 @@
  */
 package Controlador;
 
-import DataTransferObject.DTOCliente;
+import Adaptador.ClienteChucky;
+import Adaptador.IIndicadorEconomico;
+import Adaptador.ITiempo;
+import Adaptador.WebServiceBCCR;
 import DataTransferObject.DTOSistema;
 import Modelo.Cliente;
 import Modelo.Fabrica.FactoryCliente;
@@ -15,6 +18,7 @@ import Modelo.Observador.BitacoraXML;
 import Modelo.Observador.Subject;
 import Modelo.SistemaAmortizacion;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,45 +42,51 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public Cliente crearCliente(DTOCliente dtoCliente) {
-        FactoryCliente factory = FactoryCliente.getInstance();
+    public DTOSistema crearAmortizacion(DTOSistema dtoSistema) {
+
+        FactorySistemaAmortizacion factoryAmortizacion = FactorySistemaAmortizacion.getInstance();
+        FactoryCliente factoryCliente = FactoryCliente.getInstance();
+
+        SistemaAmortizacion amortizacion = null;
         Cliente cliente = null;
         try {
 
-            cliente = factory.crearCliente(dtoCliente);
+            cliente = factoryCliente.crearCliente(dtoSistema);
+            amortizacion = factoryAmortizacion.crearSistemaAmortizacion(dtoSistema);
+            amortizacion.setCliente(cliente);
+
+            dtoSistema.setNombreCompletoCliente(cliente.toString());
+            dtoSistema.setTabla(amortizacion.calcularTablaAmortizacion());
 
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException ex) {
             Logger.getLogger(Controlador.class
                     .getName()).log(Level.SEVERE, null, ex);
 
         }
-        return cliente;
+        return dtoSistema;
     }
 
     @Override
-    public SistemaAmortizacion crearAmortizacion(DTOSistema dtoSistema) {
-        FactorySistemaAmortizacion factory = FactorySistemaAmortizacion.getInstance();
-        SistemaAmortizacion amortizacion = null;
-        try {
+    public void registrarBitacora(DTOSistema dtoSistema) {
 
-            amortizacion = factory.crearSistemaAmortizacion(dtoSistema);
-
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException ex) {
-            Logger.getLogger(Controlador.class
-                    .getName()).log(Level.SEVERE, null, ex);
-
-        }
-        return amortizacion;
-    }
-
-    @Override
-    public void registrarBitacora(DTOCliente dtoCliente, DTOSistema dtoSistema) {
-        
         Subject subject = new Subject();
         new BitacoraXML(subject);
         new BitacoraCSV(subject);
-        subject.setRegistro(dtoCliente, dtoSistema);
+        subject.setRegistro(dtoSistema);
 
+    }
+
+    @Override
+    public String getTipoCambioCompra() {
+        IIndicadorEconomico tipoCambio = new WebServiceBCCR();
+        return tipoCambio.obtenerTipoCambio();
+        
+    }
+
+    @Override
+    public String getFechaHora() {
+        ITiempo tiempo = new ClienteChucky();
+        return tiempo.getFechaHora();
     }
 
 }
