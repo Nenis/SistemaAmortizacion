@@ -340,6 +340,7 @@ public class VistaGUI extends javax.swing.JFrame {
         int plazoP = Integer.parseInt(plazo);
         double interesP = Double.parseDouble(interes)/100;
         DTOSistema dtoSistema = crearSistema(nombre,ap1,ap2,"Fisico",montoP,plazoP,interesP,moneda,sistema);
+        controlador.registrarBitacora(dtoSistema);
         PasarDatos(dtoSistema,tipoCambio,fechaHora);
     }
 

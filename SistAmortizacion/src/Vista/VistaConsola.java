@@ -42,7 +42,7 @@ public class VistaConsola {
         //creacion del sistema
         DTOSistema dtoSistema = crearSistema(nombre, apellido1, apellido2, "Fisico", prestamo, plazo, interes,
                 moneda, tipoAmortizacion);
-
+        controlador.registrarBitacora(dtoSistema);
         System.out.println(getTipoCambioCompra());
         String datos = mostrarDatosSistema(dtoSistema);
         System.out.println(datos);
