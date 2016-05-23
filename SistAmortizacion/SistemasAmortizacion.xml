@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sistema_Amortizacion>
+    <Sistemas_Registrados>
+        <Sistema>Aleman</Sistema>
+        <Sistema>Frances</Sistema>
+        <Sistema>Americano</Sistema>
+    </Sistemas_Registrados>
+</Sistema_Amortizacion>
