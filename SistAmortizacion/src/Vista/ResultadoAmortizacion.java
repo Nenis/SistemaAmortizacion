@@ -5,6 +5,11 @@
  */
 package Vista;
 
+import DataTransferObject.DTOSistema;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author SilviaElena
@@ -16,16 +21,21 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
      */
     public ResultadoAmortizacion() {
         initComponents();
+
     }
 
-    public void cargarDatos(String nombre, String monto, String plazoPrestamo, String interes, String sistema){
-        String nombreCompleto = nombre;
-        nombreCliente.setText(nombreCompleto);
-        montoOtorgado.setText(monto);
-        plazo.setText(plazoPrestamo);
-        this.interes.setText(interes);
-        this.sistema.setText(sistema);
+    public void cargarDatos(DTOSistema sistema, String tipoCambio, String chucky) {
+        nombreCliente.setText(sistema.getNombreCompletoCliente());
+        montoOtorgado.setText(sistema.getMontoPrestamo() + " " + sistema.getMoneda());
+        plazo.setText(String.valueOf(sistema.getPlazo()));
+        this.interes.setText(sistema.getInteres() + " %");
+        this.sistema.setText(sistema.getTipoSistema());
+        tipoCambioDolar.setText(tipoCambio);
+        this.chucky.setText(chucky);
+        llenarTabla(sistema.getTabla(), sistema);
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,9 +63,8 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        chuky = new javax.swing.JLabel();
+        tipoCambioDolar = new javax.swing.JLabel();
+        chucky = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -77,6 +86,13 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tablaAmortizacion);
+        if (tablaAmortizacion.getColumnModel().getColumnCount() > 0) {
+            tablaAmortizacion.getColumnModel().getColumn(0).setResizable(false);
+            tablaAmortizacion.getColumnModel().getColumn(1).setResizable(false);
+            tablaAmortizacion.getColumnModel().getColumn(2).setResizable(false);
+            tablaAmortizacion.getColumnModel().getColumn(3).setResizable(false);
+            tablaAmortizacion.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jPanel1.setBackground(new java.awt.Color(0, 49, 33));
 
@@ -91,7 +107,7 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(196, 196, 196)
                 .addComponent(jLabel1)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,22 +147,26 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo de cambio compra BCCR:");
 
-        jLabel4.setText("tipoCambio");
+        tipoCambioDolar.setText("tipoCambio");
 
-        jLabel2.setText("Chucky Date and Time:");
-
-        chuky.setText("chuky");
+        chucky.setText("chucky");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(133, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chucky)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel16)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(tipoCambioDolar)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -163,22 +183,12 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
                             .addComponent(montoOtorgado)
                             .addComponent(nombreCliente)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel15))
+                        .addGap(50, 50, 50)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chuky))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel16)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel4))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel15)))
+                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -186,7 +196,7 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(239, 239, 239)
                             .addComponent(jLabel7)
-                            .addGap(0, 433, Short.MAX_VALUE))
+                            .addGap(0, 438, Short.MAX_VALUE))
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap()))
         );
@@ -196,11 +206,9 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
                 .addGap(89, 89, 89)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(tipoCambioDolar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(chuky))
+                .addComponent(chucky)
                 .addGap(25, 25, 25)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -223,22 +231,46 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sistema)
                     .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(185, 185, 185)
                     .addComponent(jLabel7)
-                    .addContainerGap(240, Short.MAX_VALUE)))
+                    .addContainerGap(336, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void llenarTabla(ArrayList<ArrayList<Double>> tabla, DTOSistema sistema) {
+        DefaultTableModel modelo = (DefaultTableModel) tablaAmortizacion.getModel();
+        Object[] columna = new Object[sistema.getPlazo() + 1];
+        for (int x = 0; x < tabla.get(1).size(); x++) {
+            for (int i = 0; i < tabla.size(); i++) {
+                if (x == tabla.get(1).size() - 1) {
+                    columna[0] = "Total";
+                } else {
+                    columna[0] = x + 1;
+                }
+                if (x + 1 > tabla.get(0).size() && i == 0) {
+                    columna[i + 1] = " ";
+                } else {
+                    columna[i + 1] = tabla.get(i).get(x);
+
+                }
+
+            }
+            modelo.addRow(columna);
+        }
+
+        tablaAmortizacion.setModel(modelo);
+    }
 
     /**
      * @param args the command line arguments
@@ -276,7 +308,7 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JLabel chuky;
+    public javax.swing.JLabel chucky;
     public javax.swing.JLabel interes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -286,9 +318,7 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -297,5 +327,6 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
     public javax.swing.JLabel plazo;
     public javax.swing.JLabel sistema;
     private javax.swing.JTable tablaAmortizacion;
+    private javax.swing.JLabel tipoCambioDolar;
     // End of variables declaration//GEN-END:variables
 }

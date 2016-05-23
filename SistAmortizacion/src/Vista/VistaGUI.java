@@ -7,7 +7,9 @@ package Vista;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
-import Adaptador.WebServiceBCCR;
+import Controlador.Controlador;
+import Controlador.IControlador;
+import DataTransferObject.DTOSistema;
 import Datos.LectorData;
 import Validacion.Validacion;
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ import javax.swing.JOptionPane;
  * @author SilviaElena
  */
 public class VistaGUI extends javax.swing.JFrame {
+
+    IControlador controlador = Controlador.getInstance();
 
     /**
      * Creates new form VistaGUI
@@ -45,7 +49,7 @@ public class VistaGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel8 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtAp1 = new javax.swing.JTextField();
@@ -74,12 +78,12 @@ public class VistaGUI extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel8.setText("Seleccione el Sistema de Amortización");
 
-        jButton2.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.setName("btnCancelar"); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setName("btnCancelar"); // NOI18N
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -200,7 +204,7 @@ public class VistaGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(btnCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRealizarOperacion))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -290,7 +294,7 @@ public class VistaGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRealizarOperacion)
-                    .addComponent(jButton2))
+                    .addComponent(btnCancelar))
                 .addGap(30, 30, 30))
         );
 
@@ -298,57 +302,92 @@ public class VistaGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void monedasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monedasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_monedasActionPerformed
 
-    public void realizarOperacion(){
+    public String getTipoCambioCompra() {
+        return controlador.getTipoCambioCompra();
+    }
+
+    public String getFechaHora() {
+        return controlador.getFechaHora();
+    }
+
+    public DTOSistema crearSistema(String nombreCliente,
+            String apellido1, String apellido2, String tipoCliente, double prestamo, int plazo,
+            double interes, String moneda, String tipoSistema) {
+
+        DTOSistema dtoSistema = new DTOSistema();
+        dtoSistema.setMontoPrestamo(prestamo);
+        dtoSistema.setPlazo(plazo);
+        dtoSistema.setInteres(interes);
+        dtoSistema.setTipoSistema(tipoSistema);
+        dtoSistema.setMoneda(moneda);
+        dtoSistema.setNombreCliente(nombreCliente);
+        dtoSistema.setPrimerApellidoCliente(apellido1);
+        dtoSistema.setSegundoApellidoCliente(apellido2);
+        dtoSistema.setTipoCliente(tipoCliente);
+        return controlador.crearAmortizacion(dtoSistema);
+    }
+    
+    public void realizarOperacion(String nombre, String ap1, String ap2, String monto,
+            String plazo, String interes, String moneda, String sistema) {
+
+        String tipoCambio = getTipoCambioCompra();
+        String fechaHora = getFechaHora();
+        double montoP = Double.parseDouble(monto);
+        int plazoP = Integer.parseInt(plazo);
+        double interesP = Double.parseDouble(interes)/100;
+        DTOSistema dtoSistema = crearSistema(nombre,ap1,ap2,"Fisico",montoP,plazoP,interesP,moneda,sistema);
+        PasarDatos(dtoSistema,tipoCambio,fechaHora);
+    }
+
+    public void PasarDatos(DTOSistema sistema, String tipoCambio, String chucky) {
         this.setVisible(false);
         ResultadoAmortizacion resultado = new ResultadoAmortizacion();
         resultado.setVisible(true);
-        String nombre = txtNombre.getText() +" " +  txtAp1.getText() +" "+ txtAp2.getText();
-        String monto = txtMonto.getText() + " " + monedas.getSelectedItem();
-        String tiempo = String.valueOf(plazo.getValue() + " años");
-        String sistema = String.valueOf(sistemas.getSelectedItem());
-        String interes = txtInteres.getText() + " %"; 
-        resultado.cargarDatos(nombre,monto, tiempo, interes,sistema );
+        resultado.cargarDatos(sistema,tipoCambio, chucky);
     }
-   
-    
+
+
     private void btnRealizarOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarOperacionActionPerformed
         String nombre = txtNombre.getText();
         String ap1 = txtAp1.getText();
         String ap2 = txtAp2.getText();
         String monto = txtMonto.getText();
         String interes = txtInteres.getText();
-        if (validarCamposVacios(nombre,ap1,ap2,monto,interes)) {
-            if (validarCamposValor(nombre,ap1,ap2,monto,interes)) {
-                realizarOperacion();
-            }
-            else{
+        String plaz = String.valueOf(plazo.getValue());
+        String sistema = (String) sistemas.getSelectedItem();
+        String moneda = (String) monedas.getSelectedItem();
+
+        if (validarCamposVacios(nombre, ap1, ap2, monto, interes)) {
+            if (validarCamposValor(nombre, ap1, ap2, monto, interes)) {
+                realizarOperacion(nombre, ap1, ap2, monto, plaz, interes, moneda, sistema);
+            } else {
                 JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Ingrese todos los datos");
         }
-        
+
     }//GEN-LAST:event_btnRealizarOperacionActionPerformed
 
-    public Boolean validarCamposVacios(String nombre, String ap1 , String ap2, String monto, String interes){
-        return !nombre.equals("") && !nombre.equals(" ") && !ap1.equals("") && !ap1.equals(" ") 
-                && !ap2.equals("") && !ap2.equals(" ")  && !monto.equals("") && !interes.equals("");
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    public Boolean validarCamposVacios(String nombre, String ap1, String ap2, String monto, String interes) {
+        return !nombre.equals("") && !nombre.equals(" ") && !ap1.equals("") && !ap1.equals(" ")
+                && !ap2.equals("") && !ap2.equals(" ") && !monto.equals("") && !interes.equals("");
     }
-    
-    public Boolean validarCamposValor(String nombre, String ap1, String ap2, String monto, String interes){
+
+    public Boolean validarCamposValor(String nombre, String ap1, String ap2, String monto, String interes) {
         Validacion val = new Validacion();
-        return val.validarNombre(nombre) && val.validarNombre(ap1) && val.validarNombre(ap2) &&
-                val.validarDouble(monto) && val.validarNumero(interes);
+        return val.validarNombre(nombre) && val.validarNombre(ap1) && val.validarNombre(ap2)
+                && val.validarDouble(monto) && val.validarNumero(interes);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -393,8 +432,8 @@ public class VistaGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRealizarOperacion;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
