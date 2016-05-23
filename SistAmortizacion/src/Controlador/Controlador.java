@@ -79,7 +79,7 @@ public class Controlador implements IControlador {
     @Override
     public String getTipoCambioCompra() {
         IIndicadorEconomico tipoCambio = new WebServiceBCCR();
-        return tipoCambio.obtenerTipoCambio();
+        return tipoCambio.obtenerTipoCambioDolar();
         
     }
 
