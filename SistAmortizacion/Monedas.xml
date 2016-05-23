@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Monedas>
     <Monedas_Registradas>
-        <Moneda>Aleman</Moneda>
-        <Moneda>Frances</Moneda>
-        <Moneda>Americano</Moneda>
+        <Moneda>Colones</Moneda>
+    </Monedas_Registradas>
+    <Monedas_Registradas>
+        <Moneda>Dolares</Moneda>
     </Monedas_Registradas>
 </Monedas>

@@ -8,11 +8,10 @@ package Datos;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -27,26 +26,38 @@ public class LectorData {
 
     public LectorData() {
     }
-    
-    public ArrayList<String> getSistemasRegistrados(){
+
+    public ArrayList<String> getRegistros(String tipo) {
+        ArrayList<String> registros = new ArrayList<>();
+        if (tipo == "Monedas") {
+            registros = getRegistroArchivo(tipo, "Monedas_Registradas", "Moneda");
+        } else if (tipo == "SistemasAmortizacion") {
+            registros = getRegistroArchivo(tipo, "Sistemas_Registrados", "Sistema");
+        } else {
+            return registros;
+        }
+        return registros;
+    }
+
+    private ArrayList<String> getRegistroArchivo(String nombre, String etiquetaChild, String etiquetaNodo) {
         ArrayList<String> sistemas = new ArrayList<>();
         try {
-            File xml = new File("SistemasAmortizacion.xml"); //Lee archivo xml
-            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = documentFactory.newDocumentBuilder();
-            Document document = (Document) db.parse(xml);
+            File inputFile = new File(nombre + ".xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
 
-            NodeList list = document.getElementsByTagName("Sistemas_Registrados");
-
-            for (int i = 0; i < list.getLength(); i++) {
-                Node node = list.item(i);
+            NodeList nList = doc.getElementsByTagName(etiquetaChild);
+            for (int i = 0; i < nList.getLength(); i++) {
+                Node node = nList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
-                    sistemas.add(element.getElementsByTagName("Sistema").item(0).getTextContent());
+                    sistemas.add(element.getElementsByTagName(etiquetaNodo).item(0).getTextContent());
                 }
             }
-        } catch (SAXException | IOException | ParserConfigurationException ex) {
-            System.out.println("No pudo acceder al archivo");
+        } catch (ParserConfigurationException | SAXException | IOException | DOMException e) {
+            e.printStackTrace();
         }
         return sistemas;
     }

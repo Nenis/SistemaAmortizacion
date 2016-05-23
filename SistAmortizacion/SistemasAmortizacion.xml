@@ -2,7 +2,11 @@
 <Sistema_Amortizacion>
     <Sistemas_Registrados>
         <Sistema>Aleman</Sistema>
+    </Sistemas_Registrados>
+    <Sistemas_Registrados>
         <Sistema>Frances</Sistema>
+    </Sistemas_Registrados>
+    <Sistemas_Registrados>
         <Sistema>Americano</Sistema>
     </Sistemas_Registrados>
 </Sistema_Amortizacion>

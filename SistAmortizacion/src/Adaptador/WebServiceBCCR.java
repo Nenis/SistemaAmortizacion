@@ -46,7 +46,7 @@ public class WebServiceBCCR implements IIndicadorEconomico {
             }
 
         } catch (ParserConfigurationException | SAXException | IOException ex) {
-            return ex.toString();
+            return "El servidor no proceso la solicitud";
         }
         
         return reducirDecimales(valor);
