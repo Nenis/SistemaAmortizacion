@@ -97,7 +97,7 @@ public class BitacoraXML extends Bitacora {
             transformarArchivo(doc);
 
         } catch (ParserConfigurationException | SAXException | IOException ex) {
-            Logger.getLogger(BitacoraXML.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("No se pudo crear un nuevo registro");
         }
     }
 

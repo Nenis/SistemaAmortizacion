@@ -61,7 +61,7 @@ public class BitacoraCSV extends Bitacora {
             archivo.flush();
             archivo.close();
         } catch (IOException ex) {
-            Logger.getLogger(BitacoraCSV.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("No se pudo crear un nuevo registro");
         }
     }
 
