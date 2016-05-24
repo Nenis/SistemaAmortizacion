@@ -28,7 +28,7 @@ import java.util.logging.Logger;
  */
 public class Controlador implements IControlador {
 
-    public static Controlador instancia;
+    private static Controlador instancia;
 
     private Controlador() {
     }
