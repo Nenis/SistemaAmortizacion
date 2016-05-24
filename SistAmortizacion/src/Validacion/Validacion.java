@@ -43,8 +43,7 @@ public class Validacion {
     }
     public Double formatearDouble(Double valor) {
         DecimalFormat decimales = new DecimalFormat("0.00");
-        decimales.format(valor);
-        return valor;
+        return Double.parseDouble(decimales.format(decimales));
     }
 
 }
