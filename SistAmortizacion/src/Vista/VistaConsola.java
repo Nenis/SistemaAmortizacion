@@ -43,7 +43,8 @@ public class VistaConsola {
         DTOSistema dtoSistema = crearSistema(nombre, apellido1, apellido2, "Fisico", prestamo, plazo, interes,
                 moneda, tipoAmortizacion);
         controlador.registrarBitacora(dtoSistema);
-        System.out.println(getTipoCambioCompra());
+        System.out.println("\n");
+        System.out.println("Tipo de cambio compra BCCR: " + getTipoCambioCompra());
         String datos = mostrarDatosSistema(dtoSistema);
         System.out.println(datos);
         System.out.println(formatearTabla(dtoSistema));
@@ -56,7 +57,7 @@ public class VistaConsola {
                 + "\nCliente: " + dtoSistema.getNombreCompletoCliente()
                 + "\nMonto del prestamo otrogado: " + String.valueOf(dtoSistema.getMontoPrestamo()) + " " + dtoSistema.getMoneda()
                 + "\nPlazo del prestamo: " + String.valueOf(dtoSistema.getPlazo()) + " annos"
-                + "\nInteres anual: " + String.valueOf(dtoSistema.getInteres()) + "%"
+                + "\nInteres anual: " + String.valueOf(dtoSistema.getInteres()*100) + "%"
                 + "\nSistema de amortizacio: " + dtoSistema.getTipoSistema();
         return data;
     }
@@ -98,10 +99,10 @@ public class VistaConsola {
 
     public String pedirMoneda() {
         ArrayList<String> monedas = new ArrayList<>();
-        monedas.add("Dolar");
-        monedas.add("Colon");
+        monedas.add("Dolares");
+        monedas.add("Colones");
 
-        System.out.println("Seleccione la moneda en el que desea la amortizacion ");
+        System.out.println("Seleccione la moneda en la que desea la tabla de amortizacion ");
         int size = 1;
         for (String elemento : monedas) {
             System.out.println(size + ") " + elemento);
@@ -170,11 +171,11 @@ public class VistaConsola {
     }
 
     public double pedirPrestamo() {
-        System.out.println("Digite el Prestamo:");
+        System.out.println("Digite el monto del prestamo:");
         String entradaTeclado = "";
         entradaTeclado = scanner.nextLine();
         if (!validacion.validarDouble(entradaTeclado)) {
-            System.out.println("Prestamo incorrecto");
+            System.out.println("Monto incorrecto");
             return pedirPrestamo();
 
         }
