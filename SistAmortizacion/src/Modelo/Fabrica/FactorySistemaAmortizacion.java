@@ -7,9 +7,6 @@ package Modelo.Fabrica;
 
 import DataTransferObject.DTOSistema;
 import Modelo.SistemaAmortizacion;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 
 /**
  *
@@ -30,10 +27,14 @@ public class FactorySistemaAmortizacion {
         return FactorySistemaAmortizacion.instancia;
     }
 
-    public SistemaAmortizacion crearSistemaAmortizacion(DTOSistema dtoSistema) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-
-        Class c = Class.forName("Modelo." + dtoSistema.getTipoSistema());
-        SistemaAmortizacion objeto = (SistemaAmortizacion) c.getConstructor(DTOSistema.class).newInstance(dtoSistema);
+    public SistemaAmortizacion crearSistemaAmortizacion(DTOSistema dtoSistema) {
+        SistemaAmortizacion objeto = null;
+        try {
+            Class c = Class.forName("Modelo." + dtoSistema.getTipoSistema());
+            objeto = (SistemaAmortizacion) c.getConstructor(DTOSistema.class).newInstance(dtoSistema);
+        } catch (Exception ex) {
+            System.out.println("No se pudo crear el Sistema");
+        }
         return objeto;
     }
 
