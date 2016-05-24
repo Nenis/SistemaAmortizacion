@@ -28,7 +28,7 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
         nombreCliente.setText(sistema.getNombreCompletoCliente());
         montoOtorgado.setText(sistema.getMontoPrestamo() + " " + sistema.getMoneda());
         plazo.setText(String.valueOf(sistema.getPlazo()));
-        this.interes.setText(sistema.getInteres() + " %");
+        this.interes.setText(sistema.getInteres() * 100 + " %");
         this.sistema.setText(sistema.getTipoSistema());
         tipoCambioDolar.setText(tipoCambio);
         this.chucky.setText(chucky);
