@@ -26,8 +26,8 @@ public class Subject {
         observadores.add(observador);
     }
     
-    public void desAdjuntar(Bitacora observer){
-        observadores.remove(observer);
+    public void desAdjuntar(Bitacora observador){
+        observadores.remove(observador);
     }
 
     public void notificarObservadores(DTOSistema sistema) {
