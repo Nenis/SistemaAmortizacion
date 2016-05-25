@@ -22,7 +22,7 @@ public class BitacoraCSV extends Bitacora {
     public BitacoraCSV(Subject subject) {
         BitacoraCSV.pathCSV = "Registro_Historico.csv";
         this.subject = subject;
-        subject.attach(this);
+        subject.adjuntar(this);
     }
 
     @Override

@@ -16,12 +16,13 @@ public class Subject {
 
     private ArrayList<Bitacora> observers = new ArrayList<>();
 
+    public Subject(){}
 
     public void setRegistro(DTOSistema sistema) {
         notificarObservadores(sistema);
     }
 
-    public void attach(Bitacora observer) {
+    public void adjuntar(Bitacora observer) {
         observers.add(observer);
     }
 
