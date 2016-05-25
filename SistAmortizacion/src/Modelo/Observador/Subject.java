@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Subject {
 
-    private ArrayList<Bitacora> observers = new ArrayList<>();
+    private ArrayList<Bitacora> observadores = new ArrayList<>();
 
     public Subject(){}
 
@@ -22,12 +22,16 @@ public class Subject {
         notificarObservadores(sistema);
     }
 
-    public void adjuntar(Bitacora observer) {
-        observers.add(observer);
+    public void adjuntar(Bitacora observador) {
+        observadores.add(observador);
+    }
+    
+    public void desAdjuntar(Bitacora observer){
+        observadores.remove(observer);
     }
 
     public void notificarObservadores(DTOSistema sistema) {
-        for (Bitacora observer : observers) {
+        for (Bitacora observer : observadores) {
             observer.update(sistema);
         }
     }
