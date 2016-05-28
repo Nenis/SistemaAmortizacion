@@ -30,7 +30,6 @@ public class DTOSistema {
     public DTOSistema() {
     }
     
-
     public String getNombreCliente() {
         return nombreCliente;
     }
