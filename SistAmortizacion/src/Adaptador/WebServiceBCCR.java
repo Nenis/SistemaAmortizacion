@@ -10,11 +10,11 @@ import org.xml.sax.SAXException;
 
 public class WebServiceBCCR implements IIndicadorEconomico {
 
-    private final String indicador = "317"; //Compra venta 318
-    private final String fechaInicio;
-    private final String fechaFinal;
-    private final String nombre = "User";
-    private final String subniveles = "N";
+    private String indicador = "317"; //Compra venta 318
+    private String fechaInicio;
+    private String fechaFinal;
+    private String nombre = "User";
+    private String subniveles = "N";
     private BufferedWriter writer = null;
 
     public WebServiceBCCR() {
