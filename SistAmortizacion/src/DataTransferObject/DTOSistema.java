@@ -98,7 +98,7 @@ public class DTOSistema {
         return interes;
     }
 
-    public void setMontoPrestamo(double montoPrestamo) {
+    public void setMontoPrestamo(Double montoPrestamo) {
         this.montoPrestamo = montoPrestamo;
     }
 
