@@ -16,6 +16,9 @@ public abstract class Bitacora {
 
     protected Subject subject;
 
+    public Bitacora() {
+    }
+    
     public abstract void crearArchivo();
 
     public Boolean validarArchivo(String path) {
