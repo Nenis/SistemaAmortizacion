@@ -14,10 +14,10 @@ import java.util.ArrayList;
  */
 public class Subject {
 
-    private ArrayList<Bitacora> observadores;
+    private ArrayList<Bitacora> bitacoras;
 
     public Subject(){
-        this.observadores = new ArrayList<>();
+        this.bitacoras = new ArrayList<>();
     }
 
     public void setRegistro(DTOSistema sistema) {
@@ -25,16 +25,16 @@ public class Subject {
     }
 
     public void adjuntar(Bitacora observador) {
-        observadores.add(observador);
+        bitacoras.add(observador);
     }
     
     public void desAdjuntar(Bitacora observador){
-        observadores.remove(observador);
+        bitacoras.remove(observador);
     }
 
     public void notificarObservadores(DTOSistema sistema) {
-        for (Bitacora observer : observadores) {
-            observer.update(sistema);
+        for (Bitacora bitacora : bitacoras) {
+            bitacora.update(sistema);
         }
     }
 }
