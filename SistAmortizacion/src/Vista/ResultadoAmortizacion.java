@@ -295,10 +295,11 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
                 } else {
                     columna[0] = x + 1;
                 }
+                System.out.println(tabla.get(0).size());
                 if (x + 1 > tabla.get(0).size() && i == 0) {
                     columna[i + 1] = " ";
                 } else {
-                    columna[i + 1] = tabla.get(i).get(x);
+                    columna[i+1] = tabla.get(i).get(x);
 
                 }
 
