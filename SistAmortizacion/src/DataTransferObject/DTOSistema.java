@@ -78,7 +78,7 @@ public class DTOSistema {
         this.tipoSistema = tipoSistema;
     }
 
-    public double getMontoPrestamo() {
+    public Double getMontoPrestamo() {
         return montoPrestamo;
     }
 
