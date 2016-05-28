@@ -26,6 +26,9 @@ public class DTOSistema {
     private String segundoApellidoCliente;
     private String nombreCompletoCliente;
     private String tipoCliente;
+
+    public DTOSistema() {
+    }
     
 
     public String getNombreCliente() {
