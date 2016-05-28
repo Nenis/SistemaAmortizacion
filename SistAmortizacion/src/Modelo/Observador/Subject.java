@@ -14,9 +14,11 @@ import java.util.ArrayList;
  */
 public class Subject {
 
-    private ArrayList<Bitacora> observadores = new ArrayList<>();
+    private ArrayList<Bitacora> observadores;
 
-    public Subject(){}
+    public Subject(){
+        this.observadores = new ArrayList<>();
+    }
 
     public void setRegistro(DTOSistema sistema) {
         notificarObservadores(sistema);
