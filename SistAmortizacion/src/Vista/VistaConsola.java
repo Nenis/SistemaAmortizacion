@@ -57,7 +57,7 @@ public class VistaConsola {
                 + "\nCliente: " + dtoSistema.getNombreCompletoCliente()
                 + "\nMonto del prestamo otrogado: " + String.valueOf(dtoSistema.getMontoPrestamo()) + " colones" 
                 + "\nPlazo del prestamo: " + String.valueOf(dtoSistema.getPlazo()) + " annos"
-                + "\nInteres anual: " + String.valueOf(dtoSistema.getInteres()) + "%"
+                + "\nInteres anual: " + String.valueOf(dtoSistema.getInteres() * 100) + "%"
                 + "\nSistema de amortizacio: " + dtoSistema.getTipoSistema();
         return data;
     }
