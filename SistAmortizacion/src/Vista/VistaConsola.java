@@ -8,6 +8,7 @@ package Vista;
 import Controlador.Controlador;
 import Controlador.IControlador;
 import DataTransferObject.DTOSistema;
+import Datos.LectorData;
 import Validacion.Validacion;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -54,7 +55,7 @@ public class VistaConsola {
     public String mostrarDatosSistema(DTOSistema dtoSistema) {
         String data = "Datos de la consulta:"
                 + "\nCliente: " + dtoSistema.getNombreCompletoCliente()
-                + "\nMonto del prestamo otrogado: " + String.valueOf(dtoSistema.getMontoPrestamo()) + " " + dtoSistema.getMoneda()
+                + "\nMonto del prestamo otrogado: " + String.valueOf(dtoSistema.getMontoPrestamo()) + " colones" 
                 + "\nPlazo del prestamo: " + String.valueOf(dtoSistema.getPlazo()) + " annos"
                 + "\nInteres anual: " + String.valueOf(dtoSistema.getInteres()) + "%"
                 + "\nSistema de amortizacio: " + dtoSistema.getTipoSistema();
@@ -62,7 +63,7 @@ public class VistaConsola {
     }
     
     public String getTipoCambioCompra() {
-       return controlador.getTipoCambioCompra();
+       return "Tipo de cambio compra BCCR: " + controlador.getTipoCambioCompra();
     }
     
     public String getFechaHora(){
@@ -73,13 +74,14 @@ public class VistaConsola {
         String t1 = "      ";
         String t = "              ";
         String t2 = "        ";
+        String t3 = "   ";
         ArrayList<ArrayList<Double>> tabla = sistema.getTabla();
         String columna = "Tabla de amortizacion:\n\n";
         columna = "Periodo k" + t1 + "Deuda inicial" + t2 + "Intereses(sk)" + t2
                 + "Amortizacion" + t + "Cuota\n";
         for (int x = 0; x < tabla.get(1).size(); x++) {
             if (x == tabla.get(1).size() - 1) {
-                columna += "Total" + t2 + t2;
+                columna += "Total" + t2 + t2 + t3;
             } else {
                 columna += String.valueOf(x + 1) + t;
             }
@@ -97,10 +99,8 @@ public class VistaConsola {
     }
 
     public String pedirMoneda() {
-        ArrayList<String> monedas = new ArrayList<>();
-        monedas.add("Dolar");
-        monedas.add("Colon");
-
+        LectorData lector = new LectorData();
+        ArrayList<String> monedas = lector.getRegistros("Monedas");
         System.out.println("Seleccione la moneda en el que desea la amortizacion ");
         int size = 1;
         for (String elemento : monedas) {
@@ -124,10 +124,8 @@ public class VistaConsola {
 
     public String pedirAmortizacion() {
 
-        ArrayList<String> amortizaciones = new ArrayList<>();
-        amortizaciones.add("Aleman");
-        amortizaciones.add("Frances");
-        amortizaciones.add("Americano");
+        LectorData lector = new LectorData();
+        ArrayList<String> amortizaciones = lector.getRegistros("SistemasAmortizacion");
 
         System.out.println("Seleccione algun sistema de amortizacion ");
         int size = 1;
