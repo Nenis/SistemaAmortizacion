@@ -11,6 +11,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,8 +26,14 @@ public class ClienteChucky implements ITiempo {
     public ClienteChucky() {
     }
 
-    private Socket socketChucky() throws IOException {
-        Socket socketChucky = new Socket(this.direccion, this.puerto);
+    private Socket socketChucky(){
+        Socket socketChucky = null;
+        try {
+            socketChucky = new Socket(this.direccion, this.puerto);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ClienteChucky.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return socketChucky;
     }
 
