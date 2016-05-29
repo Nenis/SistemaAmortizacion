@@ -42,8 +42,7 @@ public class Validacion {
         }
     }
     public Double formatearDouble(Double valor) {
-        DecimalFormat decimales = new DecimalFormat("0.00");
-        decimales.format(valor);
+        valor = Math.round(valor*1e2)/1e2;
         return valor;
     }
 
