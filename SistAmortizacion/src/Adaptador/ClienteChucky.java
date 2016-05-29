@@ -21,6 +21,9 @@ public class ClienteChucky implements ITiempo {
     private String direccion = "localhost";
     private int puerto = 8666;
 
+    public ClienteChucky() {
+    }
+
     private Socket socketChucky() throws IOException {
         Socket socketChucky = new Socket(this.direccion, this.puerto);
         return socketChucky;

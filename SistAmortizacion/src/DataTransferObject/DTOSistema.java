@@ -26,8 +26,10 @@ public class DTOSistema {
     private String segundoApellidoCliente;
     private String nombreCompletoCliente;
     private String tipoCliente;
-    
 
+    public DTOSistema() {
+    }
+    
     public String getNombreCliente() {
         return nombreCliente;
     }
@@ -76,7 +78,7 @@ public class DTOSistema {
         this.tipoSistema = tipoSistema;
     }
 
-    public double getMontoPrestamo() {
+    public Double getMontoPrestamo() {
         return montoPrestamo;
     }
 
@@ -96,7 +98,7 @@ public class DTOSistema {
         return interes;
     }
 
-    public void setMontoPrestamo(double montoPrestamo) {
+    public void setMontoPrestamo(Double montoPrestamo) {
         this.montoPrestamo = montoPrestamo;
     }
 

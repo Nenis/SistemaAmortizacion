@@ -7,33 +7,35 @@ package Modelo.Fabrica;
 
 import DataTransferObject.DTOSistema;
 import Modelo.Cliente;
-import Modelo.SistemaAmortizacion;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  *
  * @author Kenneth
  */
 public class FactoryCliente {
-        
-        private static FactoryCliente instancia = null;
-    
-        private FactoryCliente(){}
-    
 
-        public static FactoryCliente getInstance(){
-            if(instancia == null){
-                FactoryCliente instancia = new FactoryCliente();
-                return instancia;
-            }
-            return FactoryCliente.instancia;  
+    private static FactoryCliente instancia = null;
+
+    private FactoryCliente() {
+    }
+
+    public static FactoryCliente getInstance() {
+        if (instancia == null) {
+            instancia = new FactoryCliente();
+            return instancia;
         }
-        
-        public Cliente crearCliente(DTOSistema dtoSistema) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        return FactoryCliente.instancia;
+    }
 
-        Class c = Class.forName("Modelo.Cliente" + dtoSistema.getTipoCliente());
-        Cliente objeto = (Cliente) c.getConstructor(DTOSistema.class).newInstance(dtoSistema);
+    public Cliente crearCliente(DTOSistema dtoSistema) {
+        Cliente objeto = null;
+        try {
+            Class c = Class.forName("Modelo.Cliente" + dtoSistema.getTipoCliente());
+            objeto = (Cliente) c.getConstructor(DTOSistema.class).newInstance(dtoSistema);
+        } catch (Exception ex) {
+            System.out.println("No se pudo crear el Cliente");
+        }
         return objeto;
     }
-    
+
 }

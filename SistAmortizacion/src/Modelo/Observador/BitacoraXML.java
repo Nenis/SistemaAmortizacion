@@ -7,7 +7,6 @@ package Modelo.Observador;
 
 import DataTransferObject.DTOSistema;
 import java.io.*;
-import java.util.logging.*;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
@@ -26,7 +25,7 @@ public class BitacoraXML extends Bitacora {
     public BitacoraXML(Subject subject) {
         this.pathXML = "Registro_Historico.xml";
         this.subject = subject;
-        this.subject.attach(this);
+        this.subject.adjuntar(this);
     }
 
     @Override
@@ -97,7 +96,7 @@ public class BitacoraXML extends Bitacora {
             transformarArchivo(doc);
 
         } catch (ParserConfigurationException | SAXException | IOException ex) {
-            Logger.getLogger(BitacoraXML.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("No se pudo crear un nuevo registro");
         }
     }
 
