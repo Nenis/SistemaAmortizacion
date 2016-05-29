@@ -64,7 +64,7 @@ public class VistaConsola {
     public String mostrarDatosSistema(DTOSistema dtoSistema) {
         String data = "Datos de la consulta:"
                 + "\nCliente: " + dtoSistema.getNombreCompletoCliente()
-                + "\nMonto del prestamo otrogado: " + String.valueOf(dtoSistema.getMontoPrestamo()) + " colones" 
+                + "\nMonto del prestamo otrogado: " + String.valueOf(dtoSistema.getMontoPrestamo()) + lector.getRegistros("Monedas").get(0)
                 + "\nPlazo del prestamo: " + String.valueOf(dtoSistema.getPlazo()) + " annos"
                 + "\nInteres anual: " + String.valueOf(dtoSistema.getInteres() * 100) + "%"
                 + "\nSistema de amortizacio: " + dtoSistema.getTipoSistema();
