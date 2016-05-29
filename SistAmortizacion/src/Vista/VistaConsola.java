@@ -22,6 +22,7 @@ public class VistaConsola {
     Scanner scanner = new Scanner(System.in);
     Validacion validacion = new Validacion();
     IControlador controlador = Controlador.getInstance();
+    LectorData lector = new LectorData();
 
     public void run() {
 
@@ -39,10 +40,11 @@ public class VistaConsola {
         interes = pedirInteres();
         tipoAmortizacion = pedirAmortizacion();
         moneda = pedirMoneda();
+        Double tipoCambio = verificarMoneda(moneda);
 
         //creacion del sistema
         DTOSistema dtoSistema = crearSistema(nombre, apellido1, apellido2, "Fisico", prestamo, plazo, interes,
-                moneda, tipoAmortizacion);
+                tipoCambio, tipoAmortizacion);
         controlador.registrarBitacora(dtoSistema);
         System.out.println(getTipoCambioCompra());
         String datos = mostrarDatosSistema(dtoSistema);
@@ -50,6 +52,13 @@ public class VistaConsola {
         System.out.println(formatearTabla(dtoSistema));
         System.out.println(getFechaHora());
 
+    }
+    public Double verificarMoneda(String moneda) {
+
+        if((lector.getRegistros("Monedas").get(0)).equals(moneda)){
+            return 1.0;
+        }
+        return Double.parseDouble(controlador.getTipoCambioCompra());
     }
 
     public String mostrarDatosSistema(DTOSistema dtoSistema) {
@@ -99,7 +108,6 @@ public class VistaConsola {
     }
 
     public String pedirMoneda() {
-        LectorData lector = new LectorData();
         ArrayList<String> monedas = lector.getRegistros("Monedas");
         System.out.println("Seleccione la moneda en el que desea la amortizacion ");
         int size = 1;
@@ -150,7 +158,7 @@ public class VistaConsola {
 
     public DTOSistema crearSistema(String nombreCliente,
             String apellido1, String apellido2, String tipoCliente, double prestamo, int plazo,
-            double interes, String moneda, String tipoSistema) {
+            double interes, Double moneda, String tipoSistema) {
 
         DTOSistema dtoSistema = new DTOSistema();
         dtoSistema.setMontoPrestamo(prestamo);

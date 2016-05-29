@@ -20,7 +20,6 @@ public abstract class SistemaAmortizacion {
     protected Double montoPrestamo;
     protected int plazo;
     protected Double interes;
-    protected String moneda;
     protected Cliente cliente;
 
     protected int plazoActual;
@@ -32,7 +31,6 @@ public abstract class SistemaAmortizacion {
         this.montoPrestamo = dtoSistema.getMontoPrestamo();
         this.plazo = dtoSistema.getPlazo();
         this.interes = dtoSistema.getInteres();
-        this.moneda = dtoSistema.getMoneda();
         this.plazoActual = 1;
         this.montoActual = montoPrestamo;
     }
@@ -52,17 +50,18 @@ public abstract class SistemaAmortizacion {
         return this.montoActual;
     }
 
-    public ArrayList<ArrayList<Double>> calcularTablaAmortizacion() {
+    public ArrayList<ArrayList<Double>> calcularTablaAmortizacion(Double tipoCambio) {
 
         ArrayList<Double> deudas = new ArrayList<>(),
                 intereses = new ArrayList<>(),
                 amortizaciones = new ArrayList<>(), cuotas = new ArrayList<>();
         Validacion v = new Validacion();
+
         for (; this.plazoActual <= plazo; this.plazoActual++) {
-            deudas.add(v.formatearDouble(calcularDeuda()));
-            intereses.add((v.formatearDouble(calcularInteres())));
-            amortizaciones.add((v.formatearDouble(calcularAmortizacion())));
-            cuotas.add((v.formatearDouble(calcularCuota())));
+            deudas.add(v.formatearDouble(calcularDeuda()/tipoCambio));
+            intereses.add(v.formatearDouble(calcularInteres()/tipoCambio));
+            amortizaciones.add(v.formatearDouble(calcularAmortizacion()/tipoCambio));
+            cuotas.add(v.formatearDouble(calcularCuota()/tipoCambio));
             reducirMontoActual();
         }
 
@@ -77,17 +76,19 @@ public abstract class SistemaAmortizacion {
 
     private ArrayList<ArrayList<Double>> agregarTotales(ArrayList<ArrayList<Double>> tabla) {
         double total = 0;
+        Validacion v = new Validacion();
         ArrayList<Double> lista;
         for (int i = 1; i < tabla.size(); i++) {
             lista = tabla.get(i);
             for (Double elemento : lista) {
                 total += elemento;
             }
-            lista.add(total);
+            lista.add(v.formatearDouble(total));
             total = 0;
         }
         return tabla;
     }
+    
 
     protected void aumentarPlazoActual() {
 
@@ -132,14 +133,6 @@ public abstract class SistemaAmortizacion {
 
     public void setInteres(Double interes) {
         this.interes = interes;
-    }
-
-    public String getMoneda() {
-        return moneda;
-    }
-
-    public void setMoneda(String moneda) {
-        this.moneda = moneda;
     }
 
     public Cliente getCliente() {

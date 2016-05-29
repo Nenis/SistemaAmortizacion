@@ -287,22 +287,23 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
 
     public void llenarTabla(ArrayList<ArrayList<Double>> tabla, DTOSistema sistema) {
         DefaultTableModel modelo = (DefaultTableModel) tablaAmortizacion.getModel();
-        Object[] columna = new Object[sistema.getPlazo() + 1];
+        Object[] columna = new Object[5];
+
         for (int x = 0; x < tabla.get(1).size(); x++) {
+
+            if (x == tabla.get(1).size() - 1) {
+                columna[0] = "Total";
+            } else {
+                columna[0] = x + 1;
+            }
+
             for (int i = 0; i < tabla.size(); i++) {
-                if (x == tabla.get(1).size() - 1) {
-                    columna[0] = "Total";
-                } else {
-                    columna[0] = x + 1;
-                }
-                System.out.println(tabla.get(0).size());
-                if (x + 1 > tabla.get(0).size() && i == 0) {
+                if (x == tabla.get(1).size() - 1 && i == 0) {
+
                     columna[i + 1] = " ";
                 } else {
-                    columna[i+1] = tabla.get(i).get(x);
-
+                    columna[i + 1] = tabla.get(i).get(x);
                 }
-
             }
             modelo.addRow(columna);
         }

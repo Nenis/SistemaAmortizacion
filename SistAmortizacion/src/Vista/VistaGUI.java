@@ -327,7 +327,7 @@ public class VistaGUI extends javax.swing.JFrame {
 
     public DTOSistema crearSistema(String nombreCliente,
             String apellido1, String apellido2, String tipoCliente, double prestamo, int plazo,
-            double interes, String moneda, String tipoSistema) {
+            double interes, Double moneda, String tipoSistema) {
 
         DTOSistema dtoSistema = new DTOSistema();
         dtoSistema.setMontoPrestamo(prestamo);
@@ -341,25 +341,33 @@ public class VistaGUI extends javax.swing.JFrame {
         dtoSistema.setTipoCliente(tipoCliente);
         return controlador.crearAmortizacion(dtoSistema);
     }
-    
+
     public void realizarOperacion(String nombre, String ap1, String ap2, String monto,
-            String plazo, String interes, String moneda, String sistema) {
+            String plazo, String interes, Double moneda, String sistema) {
 
         String tipoCambio = getTipoCambioCompra();
         String fechaHora = getFechaHora();
         double montoP = Double.parseDouble(monto);
         int plazoP = Integer.parseInt(plazo);
-        double interesP = Double.parseDouble(interes)/100;
-        DTOSistema dtoSistema = crearSistema(nombre,ap1,ap2,"Fisico",montoP,plazoP,interesP,moneda,sistema);
+        double interesP = Double.parseDouble(interes) / 100;
+        DTOSistema dtoSistema = crearSistema(nombre, ap1, ap2, "Fisico", montoP, plazoP, interesP, moneda, sistema);
         controlador.registrarBitacora(dtoSistema);
-        PasarDatos(dtoSistema,tipoCambio,fechaHora);
+        PasarDatos(dtoSistema, tipoCambio, fechaHora);
     }
 
     public void PasarDatos(DTOSistema sistema, String tipoCambio, String chucky) {
         this.setVisible(false);
         ResultadoAmortizacion resultado = new ResultadoAmortizacion();
         resultado.setVisible(true);
-        resultado.cargarDatos(sistema,tipoCambio, chucky);
+        resultado.cargarDatos(sistema, tipoCambio, chucky);
+    }
+
+    public Double verificarMoneda(String moneda) {
+        LectorData lector = new LectorData();
+        if ((lector.getRegistros("Monedas").get(0)).equals(moneda)) {
+            return 1.0;
+        }
+        return Double.parseDouble(controlador.getTipoCambioCompra());
     }
 
 
@@ -372,10 +380,11 @@ public class VistaGUI extends javax.swing.JFrame {
         String plaz = String.valueOf(plazo.getValue());
         String sistema = (String) sistemas.getSelectedItem();
         String moneda = (String) monedas.getSelectedItem();
+        Double tipoCambio = verificarMoneda(moneda);
 
         if (validarCamposVacios(nombre, ap1, ap2, monto, interes)) {
             if (validarCamposValor(nombre, ap1, ap2, monto, interes)) {
-                realizarOperacion(nombre, ap1, ap2, monto, plaz, interes, moneda, sistema);
+                realizarOperacion(nombre, ap1, ap2, monto, plaz, interes, tipoCambio, sistema);
             } else {
                 JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
             }

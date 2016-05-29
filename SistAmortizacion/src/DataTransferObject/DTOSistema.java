@@ -16,7 +16,7 @@ public class DTOSistema {
 
     private double montoPrestamo;
     private int plazo;
-    private String moneda;
+    private Double moneda;
     private Double interes;
     private ArrayList<ArrayList<Double>> tabla;
     private String tipoSistema;
@@ -86,11 +86,11 @@ public class DTOSistema {
         return plazo;
     }
 
-    public String getMoneda() {
+    public Double getMoneda() {
         return moneda;
     }
     
-    public void setMoneda(String moneda){
+    public void setMoneda(Double moneda){
         this.moneda = moneda;
     }
 

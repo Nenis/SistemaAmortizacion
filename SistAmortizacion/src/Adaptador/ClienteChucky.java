@@ -26,14 +26,8 @@ public class ClienteChucky implements ITiempo {
     public ClienteChucky() {
     }
 
-    private Socket socketChucky(){
-        Socket socketChucky = null;
-        try {
-            socketChucky = new Socket(this.direccion, this.puerto);
-            
-        } catch (IOException ex) {
-            Logger.getLogger(ClienteChucky.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private Socket socketChucky() throws IOException {
+        Socket socketChucky = new Socket(this.direccion, this.puerto);
         return socketChucky;
     }
 
@@ -43,8 +37,8 @@ public class ClienteChucky implements ITiempo {
         try {
             Socket chucky = this.socketChucky();
             BufferedReader buff = new BufferedReader(new InputStreamReader(chucky.getInputStream()));
-            tiempo = buff.readLine();      
-        } catch (Exception e) { 
+            tiempo = buff.readLine();
+        } catch (Exception e) {
             return "Error obteniendo el tiempo del cliente chucky";
         }
         return tiempo;
