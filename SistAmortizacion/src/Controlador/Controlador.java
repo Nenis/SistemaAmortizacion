@@ -27,14 +27,14 @@ import java.util.logging.Logger;
  */
 public class Controlador implements IControlador {
 
-    private static Controlador instancia;
+    private static Controlador instancia = null;
 
     private Controlador() {
     }
 
     public static Controlador getInstance() {
         if (instancia == null) {
-            Controlador instancia = new Controlador();
+            instancia = new Controlador();
             return instancia;
         }
         return Controlador.instancia;
