@@ -55,7 +55,7 @@ public class Controlador implements IControlador {
             amortizacion.setCliente(cliente);
 
             dtoSistema.setNombreCompletoCliente(cliente.toString());
-            dtoSistema.setTabla(amortizacion.calcularTablaAmortizacion(dtoSistema.getMoneda()));
+            dtoSistema.setTabla(amortizacion.calcularTablaAmortizacion(dtoSistema.getTipoCambio()));
 
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class

@@ -44,7 +44,7 @@ public class VistaConsola {
 
         //creacion del sistema
         DTOSistema dtoSistema = crearSistema(nombre, apellido1, apellido2, "Fisico", prestamo, plazo, interes,
-                tipoCambio, tipoAmortizacion);
+                moneda, tipoAmortizacion, tipoCambio);
         controlador.registrarBitacora(dtoSistema);
         System.out.println(getTipoCambioCompra());
         String datos = mostrarDatosSistema(dtoSistema);
@@ -158,7 +158,7 @@ public class VistaConsola {
 
     public DTOSistema crearSistema(String nombreCliente,
             String apellido1, String apellido2, String tipoCliente, double prestamo, int plazo,
-            double interes, Double moneda, String tipoSistema) {
+            double interes, String moneda, String tipoSistema, Double tipoCambio) {
 
         DTOSistema dtoSistema = new DTOSistema();
         dtoSistema.setMontoPrestamo(prestamo);
@@ -170,6 +170,7 @@ public class VistaConsola {
         dtoSistema.setPrimerApellidoCliente(apellido1);
         dtoSistema.setSegundoApellidoCliente(apellido2);
         dtoSistema.setTipoCliente(tipoCliente);
+        dtoSistema.setTipoCambio(tipoCambio);
 
         return controlador.crearAmortizacion(dtoSistema);
 

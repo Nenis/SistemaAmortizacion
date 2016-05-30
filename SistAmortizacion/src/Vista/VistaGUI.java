@@ -327,7 +327,7 @@ public class VistaGUI extends javax.swing.JFrame {
 
     public DTOSistema crearSistema(String nombreCliente,
             String apellido1, String apellido2, String tipoCliente, double prestamo, int plazo,
-            double interes, Double moneda, String tipoSistema) {
+            double interes, String moneda, String tipoSistema, Double tipoCambio) {
 
         DTOSistema dtoSistema = new DTOSistema();
         dtoSistema.setMontoPrestamo(prestamo);
@@ -339,18 +339,20 @@ public class VistaGUI extends javax.swing.JFrame {
         dtoSistema.setPrimerApellidoCliente(apellido1);
         dtoSistema.setSegundoApellidoCliente(apellido2);
         dtoSistema.setTipoCliente(tipoCliente);
+        dtoSistema.setTipoCambio(tipoCambio);
         return controlador.crearAmortizacion(dtoSistema);
     }
 
     public void realizarOperacion(String nombre, String ap1, String ap2, String monto,
-            String plazo, String interes, Double moneda, String sistema) {
+            String plazo, String interes, String moneda, String sistema) {
 
         String tipoCambio = getTipoCambioCompra();
+        Double tipoCambio2 = Double.parseDouble(tipoCambio);
         String fechaHora = getFechaHora();
         double montoP = Double.parseDouble(monto);
         int plazoP = Integer.parseInt(plazo);
         double interesP = Double.parseDouble(interes) / 100;
-        DTOSistema dtoSistema = crearSistema(nombre, ap1, ap2, "Fisico", montoP, plazoP, interesP, moneda, sistema);
+        DTOSistema dtoSistema = crearSistema(nombre, ap1, ap2, "Fisico", montoP, plazoP, interesP, moneda, sistema,tipoCambio2);
         controlador.registrarBitacora(dtoSistema);
         PasarDatos(dtoSistema, tipoCambio, fechaHora);
     }
@@ -384,7 +386,7 @@ public class VistaGUI extends javax.swing.JFrame {
 
         if (validarCamposVacios(nombre, ap1, ap2, monto, interes)) {
             if (validarCamposValor(nombre, ap1, ap2, monto, interes)) {
-                realizarOperacion(nombre, ap1, ap2, monto, plaz, interes, tipoCambio, sistema);
+                realizarOperacion(nombre, ap1, ap2, monto, plaz, interes, moneda, sistema);
             } else {
                 JOptionPane.showMessageDialog(this, "Ingrese correctamente los datos");
             }

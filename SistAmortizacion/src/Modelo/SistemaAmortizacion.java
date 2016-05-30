@@ -71,6 +71,8 @@ public abstract class SistemaAmortizacion {
         tabla.add(amortizaciones);
         tabla.add(cuotas);
         ArrayList<ArrayList<Double>> tablaTotal = this.agregarTotales(tabla);
+        plazoActual = 1;
+        montoActual = montoPrestamo;
         return tablaTotal;
     }
 

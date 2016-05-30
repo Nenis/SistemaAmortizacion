@@ -16,7 +16,7 @@ public class DTOSistema {
 
     private double montoPrestamo;
     private int plazo;
-    private Double moneda;
+    private String moneda;
     private Double interes;
     private ArrayList<ArrayList<Double>> tabla;
     private String tipoSistema;
@@ -26,10 +26,12 @@ public class DTOSistema {
     private String segundoApellidoCliente;
     private String nombreCompletoCliente;
     private String tipoCliente;
+    private Double tipoCambio;
+
 
     public DTOSistema() {
     }
-    
+
     public String getNombreCliente() {
         return nombreCliente;
     }
@@ -86,11 +88,11 @@ public class DTOSistema {
         return plazo;
     }
 
-    public Double getMoneda() {
+    public String getMoneda() {
         return moneda;
     }
-    
-    public void setMoneda(Double moneda){
+
+    public void setMoneda(String moneda) {
         this.moneda = moneda;
     }
 
@@ -116,5 +118,17 @@ public class DTOSistema {
 
     public void setTabla(ArrayList<ArrayList<Double>> tabla) {
         this.tabla = tabla;
+    }
+
+    public void setMontoPrestamo(double montoPrestamo) {
+        this.montoPrestamo = montoPrestamo;
+    }
+
+    public void setTipoCambio(Double tipoCambio) {
+        this.tipoCambio = tipoCambio;
+    }
+    
+    public Double getTipoCambio() {
+        return tipoCambio;
     }
 }
