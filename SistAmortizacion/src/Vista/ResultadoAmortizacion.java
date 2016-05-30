@@ -6,6 +6,7 @@
 package Vista;
 
 import DataTransferObject.DTOSistema;
+import Datos.LectorData;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
@@ -25,8 +26,9 @@ public class ResultadoAmortizacion extends javax.swing.JFrame {
     }
 
     public void cargarDatos(DTOSistema sistema, String tipoCambio, String chucky) {
+        LectorData lector = new LectorData();
         nombreCliente.setText(sistema.getNombreCompletoCliente());
-        montoOtorgado.setText(sistema.getMontoPrestamo() + " " + sistema.getMoneda());
+        montoOtorgado.setText(sistema.getMontoPrestamo() + " " + lector.getRegistros("Monedas").get(0));
         plazo.setText(String.valueOf(sistema.getPlazo()));
         this.interes.setText(sistema.getInteres() * 100 + " %");
         this.sistema.setText(sistema.getTipoSistema());
