@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class DTOSistema {
 
-    private double montoPrestamo;
+    private Double montoPrestamo;
     private int plazo;
     private String moneda;
     private Double interes;
@@ -118,10 +118,6 @@ public class DTOSistema {
 
     public void setTabla(ArrayList<ArrayList<Double>> tabla) {
         this.tabla = tabla;
-    }
-
-    public void setMontoPrestamo(double montoPrestamo) {
-        this.montoPrestamo = montoPrestamo;
     }
 
     public void setTipoCambio(Double tipoCambio) {
